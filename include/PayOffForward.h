@@ -13,6 +13,8 @@ class PayOffForward : public PayOff
 public:
 
     PayOffForward(double Strike_);
+	//For ex 10.2
+	PayOffForward(double Strikes_[]);
 
     virtual double operator()(double Spot) const;
     virtual ~PayOffForward(){}

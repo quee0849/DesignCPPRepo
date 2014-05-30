@@ -14,6 +14,11 @@ double PayOffForward::operator () (double Spot) const
 PayOffForward::PayOffForward(double Strike_) : Strike(Strike_)
 {
 }
+//for ex 10.2
+PayOffForward::PayOffForward(double Strikes_[]) : Strike(Strikes_[0])
+{
+}
+
 
 PayOff* PayOffForward::clone() const
 {

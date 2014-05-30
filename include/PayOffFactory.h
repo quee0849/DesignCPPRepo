@@ -20,7 +20,7 @@ class PayOffFactory
 public:
 // Note the typedef here allows us to refer to poiters to functions that take in a double and spit out a PayOff* as
 	//  CreatePayOffFunction
-	typedef PayOff* (*CreatePayOffFunction)(double );
+	typedef PayOff* (*CreatePayOffFunction)(double[] );
 	//typedef PayOff* (*CreatePayOffFunction)(double, double );
 	//typedef PayOffMult* (*CreatePayOffFunction)(double );
 	// This is a static method - we need it to be static so that it can be called without any objects of type PayOffFactory
@@ -33,7 +33,7 @@ public:
 	// note that PayOff* is type defed aboved
 	// so i guess CreatePayOff returns a pointer to a payoff function.
     //PayOff* CreatePayOff(std::string PayOffId,double Strike, double SecondStrike=0.0);
-	 PayOff* CreatePayOff(std::string PayOffId,double Strike);
+	 PayOff* CreatePayOff(std::string PayOffId, double Strike[]);
 	~PayOffFactory(){};
 
 private:

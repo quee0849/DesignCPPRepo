@@ -20,7 +20,8 @@ namespace
  // should register the class with the factory
  PayOffHelper<PayOffStraddle> RegisterStraddle("straddle");
  //Now register a forward
-PayOffHelper<PayOffForward> RegisterForward("forward");
+ PayOffHelper<PayOffForward> RegisterForward("forward");
+ PayOffHelper<PayOffDoubleDigital> RegisterDoubleDigital("doubledigital");
 }
 
 

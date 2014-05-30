@@ -15,6 +15,7 @@
 #include <PayOff3.h>
 #include <PayOffForward.h>
 #include <PayOffFactory.h>
+#include <DoubleDigital2.h>
 #include <string>
 
 // I guess PayOffHelper is our auxilliary class - one for each payoff class - that will register
@@ -28,11 +29,11 @@ public:
     PayOffHelper(std::string);
 	// Create is a member function that inputs a double - Strike - and returns a pointer to the payoff of type T
 	// (PayOff is a base class) - taking advantage of polymorphism here.
-    static PayOff* Create(double);
+    static PayOff* Create(double[]);
 };
 
 template <class T>
-PayOff* PayOffHelper<T>::Create(double Strike)
+PayOff* PayOffHelper<T>::Create(double Strike[])
 {
 	return new T(Strike);
 }

@@ -23,25 +23,32 @@ using namespace std;
 int main()
 {
 
-    double Strike=100;
+    double Strike[1];
+	Strike[0]=95;
+	Strike[1]=105;
     std::string name;
 
-    //cout << "Enter strike\n";
-    //cin >> Strike;
-    
     cout << "\npay-off name\n";
     cin >> name;
+
+    cout << "Enter strike 1\n";
+    cin >> Strike[0];
+   
+	cout << "Enter strike 2 (for double barrier for example)\n";
+	cin >> Strike[1];
+
+
 
     PayOff* PayOffPtr = PayOffFactory::Instance().CreatePayOff(name,Strike); 
 
     if (PayOffPtr != NULL)
     {
-        double Spot=93;
+        double Spot=106;
 
- /*       cout << "\nspot\n";
-        cin >> Spot;*/
+	    cout << "\nspot\n";
+        cin >> Spot;
 
-        cout << "\n PayOff with Spot " << Spot << " and strike " << Strike << " is "<< PayOffPtr->operator ()(Spot) << "\n";    
+        cout << "\n PayOff with Spot " << Spot  << " is "<< PayOffPtr->operator ()(Spot) << "\n";    
         delete PayOffPtr;
     }
     

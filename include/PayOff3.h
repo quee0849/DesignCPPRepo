@@ -26,6 +26,7 @@ class PayOffCall : public PayOff
 public:
 
     PayOffCall(double Strike_);
+	PayOffCall(double Strikes_[]);
 
     virtual double operator()(double Spot) const;
     virtual ~PayOffCall(){}
@@ -43,7 +44,8 @@ class PayOffPut : public PayOff
 public:
 
     PayOffPut(double Strike_);
-
+	// 
+	PayOffPut(double Strikes_[]);
     virtual double operator()(double Spot) const;
     virtual ~PayOffPut(){}
     virtual PayOff* clone() const;
@@ -61,7 +63,7 @@ class PayOffStraddle : public PayOff
 public:
 
     PayOffStraddle(double Strike_);
-
+	PayOffStraddle(double Strikes_[]);
     virtual double operator()(double Spot) const;
     virtual ~PayOffStraddle(){}
     virtual PayOff* clone() const;

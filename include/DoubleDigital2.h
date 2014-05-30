@@ -15,6 +15,8 @@ class PayOffDoubleDigital : public PayOff
 public:
     
     PayOffDoubleDigital(double LowerLevel_, double UpperLevel_);
+	//for ex10.2
+	PayOffDoubleDigital(double levelsArray[]);
     
     virtual double operator()(double Spot) const;
     virtual ~PayOffDoubleDigital(){}

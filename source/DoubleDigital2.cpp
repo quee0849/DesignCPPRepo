@@ -13,6 +13,12 @@ PayOffDoubleDigital::PayOffDoubleDigital(double LowerLevel_, double UpperLevel_)
 {
 }
 
+PayOffDoubleDigital::PayOffDoubleDigital(double levelsArray[])
+                      :   LowerLevel(levelsArray[0]),
+                          UpperLevel(levelsArray[1])
+{
+}
+
 double PayOffDoubleDigital::operator()(double Spot) const
 {
     if (Spot <= LowerLevel)
