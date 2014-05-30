@@ -19,8 +19,8 @@ void PayOffFactory::RegisterPayOff(string PayOffId, CreatePayOffFunction Creator
 
 // note PayOff* has been typedefed in the header file
 // basicalled this function returns a function pointer to a function that creates payoffs given an input of strike
-//PayOff* PayOffFactory::CreatePayOff(string PayOffId, double Strike)
-PayOff* PayOffFactory::CreatePayOff(string PayOffId, double Strike, double SecondStrike)
+PayOff* PayOffFactory::CreatePayOff(string PayOffId, double Strike)
+//PayOff* PayOffFactory::CreatePayOff(string PayOffId, double Strike, double SecondStrike)
 {
 	// here we look up "call" for example in  the map TheCreatorFunctions 
 	// so if "call" exists in the map then i points to the CreatePayOffFunction for calls
@@ -33,8 +33,8 @@ PayOff* PayOffFactory::CreatePayOff(string PayOffId, double Strike, double Secon
 		return NULL;
 	}
 	// Now dereference
-	//return (i->second)(Strike);
-	return (i->second)(Strike,SecondStrike);
+	return (i->second)(Strike);
+	//return (i->second)(Strike,SecondStrike);
 }
 
 PayOffFactory& PayOffFactory::Instance()
