@@ -80,22 +80,47 @@ double BlackScholesCallVega( double Spot,
     double moneyness = log(Spot/Strike);
     double d1 =( moneyness +  (r-d)*Expiry+0.5* standardDeviation*standardDeviation)/standardDeviation; 
     return Spot*exp(-d*Expiry) * sqrt(Expiry)*NormalDensity(d1);
-
-
 }
 
-/*
- *
- * Copyright (c) 2002
- * Mark Joshi
- *
- * Permission to use, copy, modify, distribute and sell this
- * software for any purpose is hereby
- * granted without fee, provided that the above copyright notice
- * appear in all copies and that both that copyright notice and
- * this permission notice appear in supporting documentation.
- * Mark Joshi makes no representations about the
- * suitability of this software for any purpose. It is provided
- * "as is" without express or implied warranty.
-*/
+double BlackScholesForwardPrice( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry)
+{
+    return exp(-r*Expiry)*(exp(r*Expiry-d*Expiry)*Spot-Strike);
+}
+
+
+double BlackScholesDigitalCallOption( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry) {
+    //double dplus = (log(S/K)+(r - d +sigma*sigma/2)*T)/(sigma*sqrt(T));
+    const double dminus = (log(Spot/Strike)+(r-d  -Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry));
+    return exp(-r*Expiry)*CumulativeNormal(dminus);
+}
+
+double BlackScholesDigitalPutOption( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry) {
+    const double dminus = (log(Spot/Strike)+(r-d-Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry));
+    return exp(-r*Expiry)*CumulativeNormal(-dminus);
+}
+
+double BlackScholesZeroCouponBond( double Spot,
+                             double Strike,
+                             double r,
+                             double d,
+                             double Vol,
+                             double Expiry){
+    return exp(-r*Expiry);
+}
+
 
