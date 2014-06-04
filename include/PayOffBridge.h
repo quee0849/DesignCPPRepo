@@ -1,5 +1,3 @@
-//
-//
 //                       PayOffBridge.h
 //
 //
@@ -11,6 +9,7 @@
 
 // this simply stores a pointer to an option payoff and takes care of memory management;
 //see pg 54
+// For vanilla options, we can then wrap this bridge in a VanillaOption class (see Vanilla3) - which will store Expiry
 class PayOffBridge
 {
 public:
@@ -35,18 +34,4 @@ inline double PayOffBridge::operator()(double Spot) const
 
 #endif
 
-/*
- *
- * Copyright (c) 2002
- * Mark Joshi
- *
- * Permission to use, copy, modify, distribute and sell this
- * software for any purpose is hereby
- * granted without fee, provided that the above copyright notice
- * appear in all copies and that both that copyright notice and
- * this permission notice appear in supporting documentation.
- * Mark Joshi makes no representations about the
- * suitability of this software for any purpose. It is provided
- * "as is" without express or implied warranty.
-*/
 

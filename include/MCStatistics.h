@@ -28,10 +28,8 @@ private:
 
 };
 
-
 class StatisticsMean : public StatisticsMC
 {
-
 public:
 
     StatisticsMean();
@@ -44,6 +42,24 @@ private:
     double RunningSum;
     unsigned long PathsDone;
 
+};
+
+// For project1
+
+class StatisticsVariance : public StatisticsMC
+{
+public:
+
+    StatisticsVariance();
+    virtual void DumpOneResult(double result);
+    virtual std::vector<std::vector<double> > GetResultsSoFar() const;
+    virtual StatisticsMC* clone() const;
+
+private:
+	//double mean;
+	double RunningSum;
+    double RunningSumSquares;
+    unsigned long PathsDone;
 };
 
 #endif

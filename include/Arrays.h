@@ -2,7 +2,8 @@
 //
 //
 //		Arrays.h	
-//
+// A fancy array of doubles that supports things like finding the min/max values,
+// applying a given function to each double in the array etc. 
 //
 //
 

@@ -2,7 +2,8 @@
 //
 //                      SimpleMC8.cpp
 //                         
-//
+// This function contains an engine for randomly evolving the stock price from 
+//S_0 to S_Expiry (= this Spot below)
 #include<SimpleMC8.h>
 #include <cmath>
 #include <Arrays.h>

@@ -16,6 +16,7 @@
 // This defines an interface. Things like antithetic will inherit from this class so we can plug in an antithetic 
 // object wherever we plugged in our random generator. 
 // Classes like antithetic and RandomParkMiller inherit from this - and share the same interface. 
+// See Random3.h for a concrete inherited random numbers class.
 class RandomBase
 {
 public:

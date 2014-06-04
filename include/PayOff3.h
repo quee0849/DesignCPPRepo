@@ -7,6 +7,8 @@
 #ifndef PAYOFF3_H
 #define PAYOFF3_H
 
+
+// abstract base payoff class 
 class PayOff
 {
 public:
@@ -20,7 +22,8 @@ public:
 private:
     
 };
-
+// inherited payoffcall class. This will be wrapped up in a PayOffBridge - which will take care of mem management.
+// Note also that this does not contain info on expiry. There is a standalone VanillaOption class that does - and that takes in a PayOff and an expiry 
 class PayOffCall : public PayOff
 {
 public:

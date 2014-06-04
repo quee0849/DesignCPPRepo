@@ -1,5 +1,3 @@
-//
-//
 //                       PayOffConstructible.h
 //
 //
@@ -47,5 +45,3 @@ PayOffHelper<T>::PayOffHelper(std::string id)
 }	  
 
 #endif 
-
-
