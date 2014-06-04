@@ -73,15 +73,14 @@ int main()
 
 		StatisticsMean gatherer;
 		ConvergenceTable gathererTwo(gatherer);
-		
-		
-
-
 
 		RandomParkMiller generator(1);
 		//RandomMersTwister generator(1);
 		AntiThetic GenTwo(generator);
 
+		//using the MC routine in SimpleMC8 - the first argument is of type VanillaOption so we have
+		// converted PayOffPtr genearated by the factory to theOption - which is of type VanillaOption
+		// (VanillaOption contains the expirty time as extra information)
 		SimpleMonteCarlo6(theOption,
                                       Spot, 
                                       VolParam,
@@ -109,4 +108,3 @@ int main()
     cin >> tmp;
     return 0;
 }
-
