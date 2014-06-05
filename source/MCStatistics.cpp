@@ -35,32 +35,37 @@ StatisticsMC* StatisticsMean::clone() const
     return new StatisticsMean(*this);
 }
 
-StatisticsVariance::StatisticsVariance()
+StatisticsBasic::StatisticsBasic()
     :
     RunningSum(0.0), PathsDone(0UL), RunningSumSquares(0.0)
 {
 }
     
-void StatisticsVariance::DumpOneResult(double result)
+void StatisticsBasic::DumpOneResult(double result)
 {
     PathsDone++;
     RunningSum += result;
 	RunningSumSquares += result*result;
 }
 
-vector<vector<double> > StatisticsVariance::GetResultsSoFar() const
+vector<vector<double> > StatisticsBasic::GetResultsSoFar() const
 {
     vector<vector<double> > Results(1);
 
-    Results[0].resize(1);
-    Results[0][0] = RunningSumSquares / PathsDone - RunningSum*RunningSum/(PathsDone*PathsDone);
+    Results[0].resize(3);
+	double mean=RunningSum/PathsDone;
+	Results[0][0]=mean;
+   double variance = RunningSumSquares / PathsDone - mean*mean; // variance
+	Results[0][1]=variance;
+   double stderror = sqrt(variance/PathsDone);
+   	Results[0][2]=stderror;
 
     return Results;
 }
 
-StatisticsMC* StatisticsVariance::clone() const
+StatisticsMC* StatisticsBasic::clone() const
 {
-    return new StatisticsVariance(*this);
+    return new StatisticsBasic(*this);
 }
 
 

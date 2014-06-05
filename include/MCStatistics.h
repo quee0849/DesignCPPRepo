@@ -9,6 +9,7 @@
 #define STATISTICS_H
 
 #include <vector>
+#include <cmath>
 // This is our  stats gatherting abstract base class that defines the interface 
 // for for example StatisticsMean
 class StatisticsMC
@@ -45,12 +46,12 @@ private:
 };
 
 // For project1
-
-class StatisticsVariance : public StatisticsMC
+// for mean, variance and std error all in one.
+class StatisticsBasic : public StatisticsMC
 {
 public:
 
-    StatisticsVariance();
+    StatisticsBasic();
     virtual void DumpOneResult(double result);
     virtual std::vector<std::vector<double> > GetResultsSoFar() const;
     virtual StatisticsMC* clone() const;
