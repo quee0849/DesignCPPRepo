@@ -44,19 +44,45 @@ void SimpleMonteCarlo6(const VanillaOption& TheOption,
 
     return;
 }
+// Project 1 - Euler Stepping
+void SimpleMonteCarlo7(const VanillaOption& TheOption, 
+						 double Spot, 
+						 const Parameters& Vol, 
+						 const Parameters& r, 
+                         unsigned long NumberOfPaths,
+						 unsigned long NumberOfSteps,
+						 StatisticsMC& gatherer,
+                         RandomBase& generator)
+{
+    //generator.ResetDimensionality(1);
+	generator.ResetDimensionality(NumberOfSteps);
+    double Expiry = TheOption.GetExpiry();
+	double deltaT = Expiry/NumberOfSteps;
+	double variance = Vol.IntegralSquare(0,Expiry); // \sigma^2T
+	double rootVariance = sqrt(variance/ NumberOfSteps); // \sigma \sqrt{Delta T}
+	double rDeltaT= (r.Integral(0,Expiry)/Expiry)*deltaT; // this assumes r is constant. 
+	//double itoCorrection = -0.5*variance; // -\sigma^2 T/2
+	//double movedSpot = Spot*exp(r.Integral(0,Expiry) +itoCorrection);
 
-/*
- *
- * Copyright (c) 2002
- * Mark Joshi
- *
- * Permission to use, copy, modify, distribute and sell this
- * software for any purpose is hereby
- * granted without fee, provided that the above copyright notice
- * appear in all copies and that both that copyright notice and
- * this permission notice appear in supporting documentation.
- * Mark Joshi makes no representations about the
- * suitability of this software for any purpose. It is provided
- * "as is" without express or implied warranty.
-*/
+	double thisSpot= Spot;
+    double discounting = exp(-r.Integral(0,Expiry));
+
+    MJArray VariateArray(NumberOfSteps);
+	double nextSpot=0.0;
+
+	for (unsigned long i=0; i < NumberOfPaths; i++)
+	{	// I guess this method fills the MJArray with Gaussians
+        generator.GetGaussians(VariateArray);
+		thisSpot=Spot; //reset starting point for each path.
+		for (unsigned long j= 0; j < NumberOfSteps; j++) 
+		{
+			nextSpot = thisSpot*(1 + rDeltaT + rootVariance*(VariateArray[j]));
+			thisSpot=nextSpot;
+		}
+		double thisPayOff = TheOption.OptionPayOff(nextSpot);
+        gatherer.DumpOneResult(thisPayOff*discounting);
+	}
+
+    return;
+}
 

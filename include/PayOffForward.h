@@ -26,6 +26,24 @@ private:
 
 };
 
+class PayOffDigitalCall : public PayOff
+{
+public:
+
+    PayOffDigitalCall(double Strike_);
+	//For ex 10.2
+	PayOffDigitalCall(double Strikes_[]);
+
+    virtual double operator()(double Spot) const;
+    virtual ~PayOffDigitalCall(){}
+    virtual PayOff* clone() const;
+
+private:
+
+    double Strike;
+
+};
+
 #endif
 /*
  *

@@ -20,6 +20,15 @@ void SimpleMonteCarlo6(const VanillaOption& TheOption,
                          unsigned long NumberOfPaths,
 						 StatisticsMC& gatherer,
                          RandomBase& generator);
+//using Euler stepping for Project 1
+void SimpleMonteCarlo7(const VanillaOption& TheOption, 
+						 double Spot, 
+						 const Parameters& Vol, 
+						 const Parameters& r, 
+                         unsigned long NumberOfPaths, 
+						 unsigned long NumberOfSteps,
+						 StatisticsMC& gatherer,
+                         RandomBase& generator);
 
 #endif
 
