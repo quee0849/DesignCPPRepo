@@ -22,7 +22,8 @@ namespace
  //Now register a forward
  PayOffHelper<PayOffForward> RegisterForward("forward");
  PayOffHelper<PayOffDoubleDigital> RegisterDoubleDigital("doubledigital");
- PayOffHelper<PayOffDigitalCall> RegisteDigitalCall("digitalcall");
+ PayOffHelper<PayOffDigitalCall> RegisterDigitalCall("digitalcall");
+  PayOffHelper<PayOffStock> RegisterStock("stock");
 }
 
 

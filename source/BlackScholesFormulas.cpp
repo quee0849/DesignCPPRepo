@@ -123,4 +123,98 @@ double BlackScholesZeroCouponBond( double Spot,
     return exp(-r*Expiry);
 }
 
+double BlackScholesDelta( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry) { // from http://en.wikipedia.org/wiki/Greeks_(finance)#Formulas_for_European_option_Greeks
+							 double dplus=(log(Spot/Strike)+(r-d+Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry)); 
+							 return exp(-Expiry*d)*CumulativeNormal(dplus);
+}
+
+double BlackScholesGamma( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry) {
+							 double dplus=(log(Spot/Strike)+(r-d+Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry)); 
+							return exp(-Expiry*d)*NormalDensity(dplus)/(Spot*Vol*sqrt(Expiry));}
+
+double BlackScholesVega( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry) {
+							const double dplus=(log(Spot/Strike)+(r-d+Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry)); 
+							return Spot*exp(-Expiry*d)*NormalDensity(dplus)*sqrt(Expiry);}
+
+double BlackScholesRho( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry) {
+							const double dminus=(log(Spot/Strike)+(r-d-Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry)); 
+							return Strike*Expiry*exp(-Expiry*r)*CumulativeNormal(dminus);}
+
+
+double BlackScholesTheta( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry) {
+const double dminus=(log(Spot/Strike)+(r-d-Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry));
+const double dplus=(log(Spot/Strike)+(r-d+Vol*Vol/2)*Expiry)/(Vol*sqrt(Expiry));
+return -exp(-d*Expiry)*Spot*NormalDensity(dplus)*Vol/(2*sqrt(Expiry)) 
+       -r*Strike*exp(-r*Expiry)*CumulativeNormal(dminus)
+	   +d*Spot*exp(-d*Expiry)*CumulativeNormal(dplus);
+}
+
+double BlackScholesDeltaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry, double epsilon) {
+	return (BlackScholesCall(Spot + epsilon ,Strike,r,d,Vol,Expiry) -  BlackScholesCall(Spot ,Strike,r,d,Vol,Expiry))/epsilon;
+}
+
+double BlackScholesGammaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry, double epsilon) {
+return (BlackScholesCall(Spot+epsilon,Strike,r,d,Vol,Expiry)-2*BlackScholesCall(Spot,Strike,r,d,Vol,Expiry)+BlackScholesCall(Spot-epsilon,Strike,r,d,Vol,Expiry))/(epsilon*epsilon);}
+
+double BlackScholesVegaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry, double epsilon) { return (BlackScholesCall(Spot ,Strike,r,d,Vol+epsilon,Expiry) -  BlackScholesCall(Spot,Strike,r,d,Vol,Expiry))/epsilon;}
+
+double BlackScholesRhoFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry, double epsilon){
+return (BlackScholesCall(Spot ,Strike,r+epsilon,d,Vol,Expiry)-BlackScholesCall(Spot,Strike,r,d,Vol,Expiry))/epsilon;
+}
+
+
+double BlackScholesThetaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+						 double Expiry, double epsilon) { // theta is minus the T derivative
+return -(BlackScholesCall(Spot ,Strike,r,d,Vol,Expiry+ epsilon)-BlackScholesCall(Spot,Strike,r,d,Vol,Expiry))/epsilon;
+}
+
 

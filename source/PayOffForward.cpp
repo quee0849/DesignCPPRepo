@@ -46,3 +46,27 @@ PayOff* PayOffDigitalCall::clone() const
 {
     return new PayOffDigitalCall(*this);
 }
+
+// straight asset
+double PayOffStock::operator () (double Spot) const
+{
+	return Spot;
+}
+
+PayOffStock::PayOffStock() 
+{
+}
+
+PayOffStock::PayOffStock(double Strike_) 
+{
+}
+
+PayOffStock::PayOffStock(double Strikes_[]) 
+{
+}
+
+
+PayOff* PayOffStock::clone() const
+{
+    return new PayOffStock(*this);
+}

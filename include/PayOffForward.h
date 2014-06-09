@@ -44,6 +44,24 @@ private:
 
 };
 
+
+class PayOffStock : public PayOff
+{
+public:
+	PayOffStock();
+    PayOffStock(double Strike_);
+	//For ex 10.2
+	PayOffStock(double Strikes_[]);
+
+    virtual double operator()(double Spot) const;
+    virtual ~PayOffStock(){}
+    virtual PayOff* clone() const;
+
+private:
+
+    double Strike;
+
+};
 #endif
 /*
  *

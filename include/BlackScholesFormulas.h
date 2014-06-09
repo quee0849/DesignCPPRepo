@@ -73,6 +73,79 @@ double BlackScholesZeroCouponBond( double Spot,
                              double Vol,
                              double Expiry);
 
+
+double BlackScholesDelta( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry);
+
+
+double BlackScholesGamma( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry);
+
+double BlackScholesVega( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry);
+
+double BlackScholesRho( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry);
+
+
+double BlackScholesTheta( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry);
+
+double BlackScholesDeltaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry,  double epsilon);
+
+double BlackScholesGammaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry,  double epsilon);
+
+double BlackScholesVegaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry,  double epsilon);
+
+double BlackScholesRhoFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry ,double epsilon);
+
+
+double BlackScholesThetaFD( double Spot,
+                         double Strike,
+                         double r,
+                         double d,
+                         double Vol,
+                         double Expiry, double epsilon);
 #endif
 
 
