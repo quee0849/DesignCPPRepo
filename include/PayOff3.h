@@ -77,6 +77,24 @@ private:
 
 };
 
+//Proj 2 - pathwise method for estimating Delta
+// 
+class PayOffDeltaCall : public PayOff
+{
+public:
+
+    PayOffDeltaCall(double Strike_);
+	PayOffDeltaCall(double Strikes_[]);
+    virtual double operator()(double Spot) const;
+    virtual ~PayOffDeltaCall(){}
+    virtual PayOff* clone() const;
+
+private:
+
+    double Strike;
+
+};
+
 #endif
 
 

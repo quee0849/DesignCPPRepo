@@ -24,6 +24,9 @@ namespace
  PayOffHelper<PayOffDoubleDigital> RegisterDoubleDigital("doubledigital");
  PayOffHelper<PayOffDigitalCall> RegisterDigitalCall("digitalcall");
   PayOffHelper<PayOffStock> RegisterStock("stock");
+  // This "payoff" has payoff equal to f'(S_T)S_T so if we value this option by MC and divide by S_0 then we get
+  // an estimate of the delta of a vanilla call (using formula (7.32) in Joshi Concepts)
+  PayOffHelper<PayOffDeltaCall> RegisterDeltaCallPathwise("deltaCallPathwise");
 }
 
 
