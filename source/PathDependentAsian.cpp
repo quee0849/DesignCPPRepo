@@ -158,3 +158,48 @@ PathDependent* PathDependentDiscreteKnockout::clone() const
 {
     return new PathDependentDiscreteKnockout(*this);
 }
+
+
+
+// PathDependetDeltaHedge
+PathDependentDeltaHedge::PathDependentDeltaHedge(const MJArray& LookAtTimes_, 
+                                       double DeliveryTime_,
+                                       const PayOffBridge& ThePayOff_)
+                                       :
+                                        PathDependent(LookAtTimes_),
+                                        DeliveryTime(DeliveryTime_),
+                                        ThePayOff(ThePayOff_),
+                                        NumberOfTimes(LookAtTimes_.size())
+{
+}
+
+unsigned long PathDependentDeltaHedge::MaxNumberOfCashFlows() const
+{
+     return 1UL;
+}
+
+MJArray PathDependentDeltaHedge::PossibleCashFlowTimes() const
+{
+    MJArray tmp(NumberOfTimes);
+	double timeInterval = 
+    tmp[0] = DeliveryTime;
+    return tmp;
+}
+
+unsigned long PathDependentDeltaHedge::CashFlows(const MJArray& SpotValues, 
+                                    std::vector<CashFlow>& GeneratedFlows) const
+{
+    double sum = SpotValues.sum();
+    double mean = sum/NumberOfTimes;
+
+    GeneratedFlows[0].TimeIndex = 0UL;
+    GeneratedFlows[0].Amount = ThePayOff(mean);
+
+    return 1UL;
+}
+
+PathDependent* PathDependentDeltaHedge::clone() const
+{
+    return new PathDependentDeltaHedge(*this);
+}
+

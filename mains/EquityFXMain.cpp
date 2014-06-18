@@ -98,7 +98,6 @@ int main()
     StatisticsMean gatherer;
     ConvergenceTable gathererTwo(gatherer);
 
-   
     RandomParkMiller generator(NumberOfDates);
     
     AntiThetic GenTwo(generator);

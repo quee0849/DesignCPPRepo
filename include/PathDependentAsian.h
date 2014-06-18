@@ -32,6 +32,7 @@ private:
     PayOffBridge ThePayOff;
     unsigned long NumberOfTimes;
 };
+
 // Ex 7.1
 class PathDependentGeometricAsian : public PathDependent
 {
@@ -54,6 +55,7 @@ private:
     PayOffBridge ThePayOff;
     unsigned long NumberOfTimes;
 };
+
 //Ex 7.2
 class PathDependentDiscreteKnockout : public PathDependent
 {
@@ -87,5 +89,27 @@ private:
     unsigned long NumberOfTimes;
 };
 
+//For Hedging Project 3.
+class PathDependentDeltaHedge : public PathDependent
+{
+public:
+
+    PathDependentDeltaHedge(const MJArray& LookAtTimes_, 
+                       double DeliveryTime_,
+                       const PayOffBridge& ThePayOff_);
+
+    virtual unsigned long MaxNumberOfCashFlows() const;
+    virtual MJArray PossibleCashFlowTimes() const;
+    virtual unsigned long CashFlows(const MJArray& SpotValues, 
+                                    std::vector<CashFlow>& GeneratedFlows) const;
+    virtual ~PathDependentDeltaHedge(){}
+    virtual PathDependent* clone() const;
+
+private:
+
+    double DeliveryTime;
+    PayOffBridge ThePayOff;
+    unsigned long NumberOfTimes;
+};
 
 #endif
