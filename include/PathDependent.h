@@ -50,6 +50,7 @@ public:
 	// and we calculate the cashFlows from this and write then to a vector of CashFlows which is passed in by reference. 
 	// This method is const i think because the vector of CashFlows is not part of our object and we therefore do not modify the PathDependent object in 
 	// any way. 
+	// It returns the number of CashFlows generated.
     virtual unsigned long CashFlows(const MJArray& SpotValues, 
                                     std::vector<CashFlow>& GeneratedFlows) const=0;
     virtual PathDependent* clone() const=0;

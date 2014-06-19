@@ -25,8 +25,8 @@ public:
 	// - this one is pure virtual and the defn in an inherited class will involve the choice of a model and 
 	// stochastic process
     virtual void GetOnePath(MJArray& SpotValues)=0;
-	// DoSimulation loops over all the paths -calling getOnePath to get the array of spot values then passing these values into DoOnePath to get the value for that 
-	// set of spot values - which is then recorded in the stats gatherer. 
+	// DoSimulation loops over all the NumberOfPaths paths -calling getOnePath to get the array of spot values then passing these values into DoOnePath to get the double value for that 
+	// set of spot values (after discounting) - which is then recorded in the stats gatherer. 
     void DoSimulation(StatisticsMC& TheGatherer, unsigned long NumberOfPaths);
     virtual ~ExoticEngine(){}
 	// 

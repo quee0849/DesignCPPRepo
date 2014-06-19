@@ -114,9 +114,6 @@ public :
 };
 
 
-
-
-
 #endif // ifdef USE_VAL_ARRAY
 
 #endif // ifndef MJARRAYS_H

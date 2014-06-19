@@ -22,6 +22,7 @@ public:
     virtual std::vector<std::vector<double> > GetResultsSoFar() const=0;
 	// have a virtual clone method to allow for virtual copy construction. (remember that constructors 
 	// themselves cannot be virtual)
+	// - since we want to wrap StatsMC object to make smart pointers we add a clone method so copying behaves well. 
     virtual StatisticsMC* clone() const=0;
     virtual ~StatisticsMC(){}
 

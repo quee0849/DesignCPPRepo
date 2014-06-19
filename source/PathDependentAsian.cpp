@@ -162,40 +162,46 @@ PathDependent* PathDependentDiscreteKnockout::clone() const
 
 
 // PathDependetDeltaHedge
-PathDependentDeltaHedge::PathDependentDeltaHedge(const MJArray& LookAtTimes_, 
+PathDependentDeltaHedge::PathDependentDeltaHedge(const MJArray& LookAtTimes_, double r_, double d_, double vol_, double strike_,
                                        double DeliveryTime_,
                                        const PayOffBridge& ThePayOff_)
                                        :
+										r(r_), d(d_), vol(vol_), expiry(DeliveryTime_),// note we are assuming expiry and deliverty time are the same for now
                                         PathDependent(LookAtTimes_),
                                         DeliveryTime(DeliveryTime_),
-                                        ThePayOff(ThePayOff_),
-                                        NumberOfTimes(LookAtTimes_.size())
+                                        ThePayOff(ThePayOff_), strike(strike_)//,
+                                     //   NumberOfTimes(LookAtTimes_.size())
 {
 }
 
 unsigned long PathDependentDeltaHedge::MaxNumberOfCashFlows() const
 {
-     return 1UL;
+     return GetLookAtTimes().size();
 }
-
+// just assuming expiry is 1 here for simplicity
+// also assuming that the times are evenly spaced for now.
 MJArray PathDependentDeltaHedge::PossibleCashFlowTimes() const
 {
-    MJArray tmp(NumberOfTimes);
-	double timeInterval = 
-    tmp[0] = DeliveryTime;
-    return tmp;
+    return GetLookAtTimes();
 }
 
 unsigned long PathDependentDeltaHedge::CashFlows(const MJArray& SpotValues, 
                                     std::vector<CashFlow>& GeneratedFlows) const
 {
-    double sum = SpotValues.sum();
-    double mean = sum/NumberOfTimes;
+	
+    //double sum = SpotValues.sum();
+    //double mean = sum/NumberOfTimes;
+	unsigned long NumberOfTimes = MaxNumberOfCashFlows();
+	GeneratedFlows[0].TimeIndex = 0;
+	GeneratedFlows[0].Amount = BlackScholesDelta(SpotValues[0], strike, r,d, vol, expiry)*SpotValues[0]; //BlackScholesDelta(SpotValues[0], strike, r,d, vol, expiry)*SpotValues[0];
+	for (unsigned long j=1; j< NumberOfTimes; j++)  {
+		GeneratedFlows[j].TimeIndex = j;
+		//double valueOfStockShouldHold=SpotValues[j]*BlackScholesDelta(SpotValues[j], strike, r,d, vol, expiry- GetLookAtTimes()[j]);
+		GeneratedFlows[j].Amount= BlackScholesDelta(SpotValues[j], strike, r,d, vol, expiry - GetLookAtTimes()[j])*SpotValues[j]- SpotValues[j-1]*BlackScholesDelta(SpotValues[j-1], strike, r,d, vol, expiry - GetLookAtTimes()[j-1]);	
+		// need to fix time vluae in delta
+	}
 
-    GeneratedFlows[0].TimeIndex = 0UL;
-    GeneratedFlows[0].Amount = ThePayOff(mean);
-
-    return 1UL;
+    return NumberOfTimes;
 }
 
 PathDependent* PathDependentDeltaHedge::clone() const

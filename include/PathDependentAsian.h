@@ -10,6 +10,7 @@
 #include <PathDependent.h>
 #include <PayOffBridge.h>
 #include <cmath>
+#include <BlackScholesFormulas.h>
 
 class PathDependentAsian : public PathDependent
 {
@@ -94,7 +95,7 @@ class PathDependentDeltaHedge : public PathDependent
 {
 public:
 
-    PathDependentDeltaHedge(const MJArray& LookAtTimes_, 
+    PathDependentDeltaHedge(const MJArray& LookAtTimes_, double r_, double d_, double vol_, double strike_,
                        double DeliveryTime_,
                        const PayOffBridge& ThePayOff_);
 
@@ -109,7 +110,12 @@ private:
 
     double DeliveryTime;
     PayOffBridge ThePayOff;
-    unsigned long NumberOfTimes;
+	double strike;
+	double r; 
+	double d;
+	double vol;
+	double expiry;
+   // unsigned long NumberOfTimes; // dont actually need this as stored in MJArray LookAtTimes in base class. 
 };
 
 #endif
